@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Planetary & Art Sandbox</title>
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-hover: #0065ff;
+            --bg-main: #f4f5f7;
+            --bg-card: #ffffff;
+            --text: #172b4d;
+            --border: #dfe1e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text);
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        /* Responsive Grid for Features */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--bg-main);
+            padding-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--bg-main);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* Color Matrix Elements */
+        .color-selectors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .preview-box {
+            width: 100%;
+            height: 100px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            margin-top: 15px;
+            background-color: #8B8589;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Ad Placement Placeholders */
+        .ad-banner {
+            background: #e2e4e9;
+            border: 2px dashed #b3bac5;
+            color: #5e6c84;
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Advanced Planetary & Art Sandbox</h1>
+           
+        </header>
+
+        <!-- TOP AD DISPLAY ZONE -->
+        <div class="ad-banner">ADVERTISEMENT SLOT (LEADERBOARD)</div>
+
+        <div class="grid">
+            
+            <!-- FEATURE 1: EARTH FREE FALL SIMULATOR -->
+            <div class="card">
+                <h2>🌍 Earth Aerodynamic Drop</h2>
+                <div class="form-group">
+                    <label for="earthHeight">Drop Height (meters):</label>
+                    <input type="number" id="earthHeight" value="100" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="earthWeight">Object Mass (kilograms):</label>
+                    <input type="number" id="earthWeight" value="75" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="objectType">Object Physical Profile:</label>
+                    <select id="objectType">
+                        <option value="1">Smooth Sphere (Baseball/Marble)</option>
+                        <option value="2">Flat Brick / Box</option>
+                        <option value="3">Skydiver (Belly-to-earth flat)</option>
+                        <option value="4">Sheet of Paper / Feather</option>
+                    </select>
+                </div>
+                <button onclick="calculateEarthDrop()">Simulate Physics</button>
+                
+                <div class="results" id="earthResults">
+                    Fill parameters to calculate drag profiles.
+                </div>
+            </div>
+
+            <!-- FEATURE 2: UNIVERSAL FREE FALL SIMULATOR -->
+            <div class="card">
+                <h2>🪐 Universal Vacuum Drop</h2>
+                <div class="form-group">
+                    <label for="universalHeight">Drop Height (meters):</label>
+                    <input type="number" id="universalHeight" value="100" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="worldChoice">Select Celestial Body:</label>
+                    <select id="worldChoice">
+                        <option value="3.70">Mercury (3.70 m/s²)</option>
+                        <option value="8.87">Venus (8.87 m/s²)</option>
+                        <option value="9.81" selected>Earth (9.81 m/s²)</option>
+                        <option value="1.62">The Moon (1.62 m/s²)</option>
+                        <option value="3.71">Mars (3.71 m/s²)</option>
+                        <option value="24.79">Jupiter (24.79 m/s²)</option>
+                        <option value="10.44">Saturn (10.44 m/s²)</option>
+                        <option value="8.69">Uranus (8.69 m/s²)</option>
+                        <option value="11.15">Neptune (11.15 m/s²)</option>
+                        <option value="0.62">Pluto (0.62 m/s²)</option>
+                    </select>
+                </div>
+                <button onclick="calculateUniversalDrop()">Calculate Free-Fall</button>
+                
+                <div class="results" id="universalResults">
+                    Select a planet to run a simulated vacuum drop.
+                </div>
+            </div>
+
+            <!-- FEATURE 3: COLOR MATRIX MIXER -->
+            <div class="card full-width">
+                <h2>🎨 3-Color Paint Matrix Mixer</h2>
+                <p style="font-size: 14px; margin-top: -10px;">Select any combination of base paints. Order doesn't matter!</p>
+                <div class="form-group color-selectors">
+                    <div>
+                        <label>Paint 1:</label>
+                        <select id="color1">
+                            <option value="1">Red</option>
+                            <option value="2">Yellow</option>
+                            <option value="3">Blue</option>
+                            <option value="4">White</option>
+                            <option value="5">Black</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Paint 2:</label>
+                        <select id="color2">
+                            <option value="1">Red</option>
+                            <option value="2" selected>Yellow</option>
+                            <option value="3">Blue</option>
+                            <option value="4">White</option>
+                            <option value="5">Black</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Paint 3:</label>
+                        <select id="color3">
+                            <option value="1">Red</option>
+                            <option value="2">Yellow</option>
+                            <option value="3">Blue</option>
+                            <option value="4" selected>White</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="mixColors()">Blend Matrix</button>
+                
+                <div class="preview-box" id="colorPreview"></div>
+                <div class="results" id="colorResults" style="text-align: center; font-weight: bold;">
+                    Resulting Mix Color Code will appear here.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTTOM AD DISPLAY ZONE -->
+        <div class="ad-banner">ADVERTISEMENT SLOT (BOTTOM BANNER)</div>
+    </div>
+</body>
+</html>
+    <!-- JAVASCRIPT WEBASSEMBLY INTERFACE BRIDGE -->
+    <script>
+        // 1. Earth Atmospheric Drag Simulation Engine
+function calculateEarthDrop() {
+    const height = parseFloat(document.getElementById('earthHeight').value);
+    const weight = parseFloat(document.getElementById('earthWeight').value);
+    const objectType = parseInt(document.getElementById('objectType').value);
+
+    if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
+        document.getElementById('earthResults').innerHTML = "Please enter valid positive values.";
+        return;
+    }
+
+    let drag_coefficient = 0.47; 
+    let cross_sectional_area = 0.004; 
+
+    if (objectType === 2) {
+        drag_coefficient = 1.05; 
+        cross_sectional_area = 0.05; 
+    } else if (objectType === 3) {
+        drag_coefficient = 1.00;
+        cross_sectional_area = 0.70; 
+    } else if (objectType === 4) {
+        drag_coefficient = 1.28;
+        cross_sectional_area = 0.06; 
+    }
+
+    const g = 9.81;            
+    const air_density = 1.225; 
+    
+    let current_height = height;
+    let velocity = 0.0;
+    let time = 0.0;
+    let dt = 0.001; 
+
+    let terminalVel = Math.sqrt((2 * weight * g) / (air_density * cross_sectional_area * drag_coefficient));
+
+    while (current_height > 0) {
+        let force_gravity = weight * g;
+        let force_drag = 0.5 * air_density * (velocity * velocity) * drag_coefficient * cross_sectional_area;
+        let net_force = force_gravity - force_drag;
+        let acceleration = net_force / weight;
+
+        velocity += acceleration * dt;
+        current_height -= velocity * dt;
+        time += dt;
+
+        if (time > 2000.0) break;
+    }
+
+    let kineticEnergy = 0.5 * weight * (velocity * velocity);
+    let vacTime = Math.sqrt((2 * height) / g);
+    let delay = time - vacTime;
+
+    document.getElementById('earthResults').innerHTML = `
+        <strong>Terminal Velocity Limit:</strong> ${terminalVel.toFixed(2)} m/s<br>
+        <strong>Final Ground Impact Speed:</strong> ${velocity.toFixed(2)} m/s<br>
+        <strong>Total Falling Duration:</strong> ${time.toFixed(3)} seconds<br>
+        <strong>Kinetic Impact Energy:</strong> ${kineticEnergy.toFixed(0)} Joules<br>
+        <strong>Vacuum Fall Reference Time:</strong> ${vacTime.toFixed(3)} seconds<br>
+        <strong>Atmospheric Drag Delay:</strong> ${delay.toFixed(3)} seconds
+    `;
+}
+
+// 2. Celestial Vacuum Freefall Simulation Engine
+function calculateUniversalDrop() {
+    const height = parseFloat(document.getElementById('universalHeight').value);
+    const selectEl = document.getElementById('worldChoice');
+    const gravity = parseFloat(selectEl.value);
+    const planetName = selectEl.options[selectEl.selectedIndex].text.split(' (')[0];
+
+    if (height <= 0 || isNaN(height) || gravity <= 0) {
+        document.getElementById('universalResults').innerHTML = "Please enter a valid height.";
+        return;
+    }
+    
+    const totalSeconds = Math.sqrt((2.0 * height) / gravity);
+
+    document.getElementById('universalResults').innerHTML = `
+        <strong>Target World:</strong> ${planetName}<br>
+        <strong>Calculated Free-fall Time:</strong> ${totalSeconds.toFixed(3)} seconds
+    `;
+}
+
+// 3. Matrix Color Paint Mixer Engine
+
+function mixColors() {
+    let choices = [
+        parseInt(document.getElementById('color1').value),
+        parseInt(document.getElementById('color2').value),
+        parseInt(document.getElementById('color3').value)
+    ];
+
+    // Digital definitions for your 5 primary selector paints
+    const paintProfiles = {
+        1: { r: 255, g: 0,   b: 0 },   // Red
+        2: { r: 255, g: 255, b: 0 },   // Yellow
+        3: { r: 0,   g: 0,   b: 255 }, // Blue
+        4: { r: 255, g: 255, b: 255 }, // White
+        5: { r: 0,   g: 0,   b: 0 }    // Black
+    };
+
+    // Calculate fluid mathematical averages
+    let totalR = 0, totalG = 0, totalB = 0;
+    choices.forEach(choice => {
+        totalR += paintProfiles[choice].r;
+        totalG += paintProfiles[choice].g;
+        totalB += paintProfiles[choice].b;
+    });
+
+    let finalR = Math.round(totalR / 3);
+    let finalG = Math.round(totalG / 3);
+    let finalB = Math.round(totalB / 3);
+
+    // Extensive Artistic Color Dictionary for Proximity Matching
+    const colorDictionary = [
+        { name: "Pure Crimson Red", r: 255, g: 0, b: 0 },
+        { name: "Sun Bright Yellow", r: 255, g: 255, b: 0 },
+        { name: "Deep Cobalt Blue", r: 0, g: 0, b: 255 },
+        { name: "Pure Titanium White", r: 255, g: 255, b: 255 },
+        { name: "Pitch Black", r: 0, g: 0, b: 0 },
+        { name: "Vivid Orange", r: 255, g: 128, b: 0 },
+        { name: "Classic Purple", r: 128, g: 0, b: 128 },
+        { name: "Forest Green", r: 0, g: 128, b: 0 },
+        { name: "Soft Pastel Peach", r: 255, g: 218, b: 185 },
+        { name: "Lavender Violet", r: 230, g: 230, b: 250 },
+        { name: "Pale Mint Green", r: 152, g: 255, b: 152 },
+        { name: "Sky Blue", r: 135, g: 206, b: 235 },
+        { name: "Bubblegum Pink", r: 255, g: 182, b: 193 },
+        { name: "Warm Cream / Off-White", r: 255, g: 253, b: 208 },
+        { name: "Deep Maroon", r: 128, g: 0, b: 0 },
+        { name: "Dark Mustard", r: 128, g: 128, b: 0 },
+        { name: "Classic Navy Blue", r: 0, g: 0, b: 128 },
+        { name: "Olive Drab", r: 85, g: 107, b: 47 },
+        { name: "Plum Purple", r: 48, g: 25, b: 52 },
+        { name: "Teal Turquoise", r: 0, g: 128, b: 128 },
+        { name: "Muted Terracotta Rose", r: 188, g: 143, b: 143 },
+        { name: "Desert Khaki / Tan", r: 195, g: 177, b: 225 },
+        { name: "Slate Blue-Gray", r: 112, g: 128, b: 144 },
+        { name: "Light Silver Gray", r: 211, g: 211, b: 211 },
+        { name: "Dark Charcoal", r: 54, g: 69, b: 79 },
+        { name: "Earthy Mud Brown", r: 92, g: 64, b: 51 }
+    ];
+
+    // Find the closest predefined name using the Distance Formula
+    let closestColorName = "";
+    let shortestDistance = Infinity;
+
+    colorDictionary.forEach(namedColor => {
+        let distance = Math.sqrt(
+            Math.pow(finalR - namedColor.r, 2) +
+            Math.pow(finalG - namedColor.g, 2) +
+            Math.pow(finalB - namedColor.b, 2)
+        );
+
+        if (distance < shortestDistance) {
+            shortestDistance = distance;
+            closestColorName = namedColor.name;
+        }
+    });
+
+    // Format output strings and display visually
+    const hexColorString = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
+    
+    document.getElementById('colorPreview').style.backgroundColor = hexColorString;
+    document.getElementById('colorResults').innerHTML = `
+        <strong>Exact Mix:</strong> RGB(${finalR}, ${finalG}, ${finalB}) | Hex: ${hexColorString}<br>
+        <strong>Closest Artistic Match:</strong> ${closestColorName}
+    `;
+}
+
+</script>
