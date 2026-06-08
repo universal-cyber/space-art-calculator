@@ -1,17 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHF44R7J17"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PHF44R7J17');
-</script>
+    <script async src="https://googletagmanager.com"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PHF44R7J17');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,35 +33,14 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            margin: 0 0 10px 0;
-            color: var(--primary);
-        }
-
-        /* Responsive Grid for Features */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { margin: 0 0 10px 0; color: var(--primary); }
+        
+        .grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
         @media (min-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .full-width {
-                grid-column: span 2;
-            }
+            .grid { grid-template-columns: 1fr 1fr; }
+            .full-width { grid-column: span 2; }
         }
 
         .card {
@@ -74,88 +51,17 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        h2 {
-            margin-top: 0;
-            border-bottom: 2px solid var(--bg-main);
-            padding-bottom: 8px;
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 15px;
-        }
-
-        button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .results {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--bg-main);
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        /* Color Matrix Elements */
-        .color-selectors {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .preview-box {
-            width: 100%;
-            height: 100px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            margin-top: 15px;
-            background-color: #8B8589;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Ad Placement Placeholders */
-        .ad-banner {
-            background: #e2e4e9;
-            border: 2px dashed #b3bac5;
-            color: #5e6c84;
-            text-align: center;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            border-radius: 6px;
-        }
+        h2 { margin-top: 0; border-bottom: 2px solid var(--bg-main); padding-bottom: 8px; color: var(--primary); }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; box-sizing: border-box; font-size: 15px; }
+        button { background-color: var(--primary); color: white; border: none; padding: 12px 20px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; width: 100%; transition: background-color 0.2s; }
+        button:hover { background-color: var(--primary-hover); }
+        .results { margin-top: 20px; padding: 15px; background-color: var(--bg-main); border-radius: 6px; font-size: 14px; }
+        
+        .color-selectors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .preview-box { width: 100%; height: 100px; border-radius: 6px; border: 1px solid var(--border); margin-top: 15px; background-color: #8B8589; }
+        .ad-banner { background: #e2e4e9; border: 2px dashed #b3bac5; color: #5e6c84; text-align: center; padding: 15px; margin: 20px 0; font-size: 13px; font-weight: bold; border-radius: 6px; }
     </style>
 </head>
 <body>
@@ -163,47 +69,43 @@
     <div class="container">
         <header>
             <h1>Advanced Planetary & Art Sandbox</h1>
-           
+            <p>High-Performance Sandbox Dashboard Utility Matrix</p>
         </header>
 
-        <!-- TOP AD DISPLAY ZONE -->
-        <div class="ad-banner">ADVERTISEMENT SLOT (LEADERBOARD)</div>
+        <div class="ad-banner">ADVERTISEMENT SLOT (TOP LEADERBOARD)</div>
 
         <div class="grid">
             
-            <!-- FEATURE 1: EARTH FREE FALL SIMULATOR -->
+            <!-- FEATURE 1: EARTH FALL -->
             <div class="card">
                 <h2>🌍 Earth Aerodynamic Drop</h2>
                 <div class="form-group">
                     <label for="earthHeight">Drop Height (meters):</label>
-                    <input type="number" id="earthHeight" value="100" min="1">
+                    <input type="number" id="earthHeight" value="100">
                 </div>
                 <div class="form-group">
-                    <label for="earthWeight">Object Mass (kilograms):</label>
-                    <input type="number" id="earthWeight" value="75" min="0.1" step="0.1">
+                    <label for="earthWeight">Object Mass (kg):</label>
+                    <input type="number" id="earthWeight" value="75">
                 </div>
                 <div class="form-group">
-                    <label for="objectType">Object Physical Profile:</label>
+                    <label for="objectType">Physical Profile:</label>
                     <select id="objectType">
-                        <option value="1">Smooth Sphere (Baseball/Marble)</option>
+                        <option value="1">Smooth Sphere (Baseball)</option>
                         <option value="2">Flat Brick / Box</option>
-                        <option value="3">Skydiver (Belly-to-earth flat)</option>
-                        <option value="4">Sheet of Paper / Feather</option>
+                        <option value="3">Skydiver (Belly-to-earth)</option>
+                        <option value="4">Sheet of Paper</option>
                     </select>
                 </div>
                 <button onclick="calculateEarthDrop()">Simulate Physics</button>
-                
-                <div class="results" id="earthResults">
-                    Fill parameters to calculate drag profiles.
-                </div>
+                <div class="results" id="earthResults">Fill parameters to calculate drag.</div>
             </div>
 
-            <!-- FEATURE 2: UNIVERSAL FREE FALL SIMULATOR -->
+            <!-- FEATURE 2 & 4: UNIVERSAL DROP & ESCAPE VELOCITY -->
             <div class="card">
-                <h2>🪐 Universal Vacuum Drop</h2>
+                <h2>🪐 Universal Vacuum & Rocket Matrix</h2>
                 <div class="form-group">
                     <label for="universalHeight">Drop Height (meters):</label>
-                    <input type="number" id="universalHeight" value="100" min="1">
+                    <input type="number" id="universalHeight" value="100">
                 </div>
                 <div class="form-group">
                     <label for="worldChoice">Select Celestial Body:</label>
@@ -220,232 +122,269 @@
                         <option value="0.62">Pluto (0.62 m/s²)</option>
                     </select>
                 </div>
-                <button onclick="calculateUniversalDrop()">Calculate Free-Fall</button>
-                
-                <div class="results" id="universalResults">
-                    Select a planet to run a simulated vacuum drop.
-                </div>
+                <button onclick="calculateUniversalAndEscape()" style="margin-bottom: 10px;">Run Physics Engines</button>
+                <div class="results" id="universalResults">Select a world to execute simulations.</div>
             </div>
 
-            <!-- FEATURE 3: COLOR MATRIX MIXER -->
+            <!-- FEATURE 5: COSMIC WEIGHT COMPARATIVE SCALE -->
             <div class="card full-width">
-                <h2>🎨 3-Color Paint Matrix Mixer</h2>
-                <p style="font-size: 14px; margin-top: -10px;">Select any combination of base paints. Order doesn't matter!</p>
+                <h2>🌌 Cosmic Weight Distribution Scale</h2>
+                <div class="form-group">
+                    <label for="cosmicWeightInput">Your Weight on Earth (lbs or kg):</label>
+                    <input type="number" id="cosmicWeightInput" value="70">
+                </div>
+                <button onclick="calculateCosmicWeights()">Compute Multi-Planetary Distribution</button>
+                <div class="results" id="cosmicResults">Your universal weight metrics will appear here.</div>
+            </div>
+
+            <!-- FEATURE 3: HYBRID FLUID COLOR MIXER & MATRICES -->
+            <div class="card full-width">
+                <h2>🎨 Fluid Paint Mixer (Universal Custom Engine)</h2>
                 <div class="form-group color-selectors">
                     <div>
                         <label>Paint 1:</label>
                         <select id="color1">
-                            <option value="1">Red</option>
-                            <option value="2">Yellow</option>
-                            <option value="3">Blue</option>
-                            <option value="4">White</option>
-                            <option value="5">Black</option>
+                            <option value="1">Red</option><option value="2">Yellow</option><option value="3">Blue</option><option value="4">White</option><option value="5">Black</option>
                         </select>
                     </div>
                     <div>
                         <label>Paint 2:</label>
                         <select id="color2">
-                            <option value="1">Red</option>
-                            <option value="2" selected>Yellow</option>
-                            <option value="3">Blue</option>
-                            <option value="4">White</option>
-                            <option value="5">Black</option>
+                            <option value="1">Red</option><option value="2" selected>Yellow</option><option value="3">Blue</option><option value="4">White</option><option value="5">Black</option>
                         </select>
                     </div>
                     <div>
                         <label>Paint 3:</label>
                         <select id="color3">
-                            <option value="1">Red</option>
-                            <option value="2">Yellow</option>
-                            <option value="3">Blue</option>
-                            <option value="4" selected>White</option>
+                            <option value="1">Red</option><option value="2">Yellow</option><option value="3">Blue</option><option value="4" selected>White</option><option value="5">Black</option>
                         </select>
                     </div>
                 </div>
-                <button onclick="mixColors()">Blend Matrix</button>
-                
+                <button onclick="mixColors()">Blend Paint Elements</button>
                 <div class="preview-box" id="colorPreview"></div>
-                <div class="results" id="colorResults" style="text-align: center; font-weight: bold;">
-                    Resulting Mix Color Code will appear here.
+                <div class="results" id="colorResults" style="text-align: center;">Run blending matrix to compute proximity maps.</div>
+            </div>
+
+            <!-- FEATURE 6: DEVELOPER CONTRAST CHECKER -->
+            <div class="card full-width">
+                <h2>🔍 UI Accessibility Contrast Diagnostics (WCAG Compliance)</h2>
+                <div class="form-group color-selectors">
+                    <div><label>Background Hex:</label><input type="text" id="bgContrastInput" value="#0052CC"></div>
+                    <div><label>Text Hex:</label><input type="text" id="textContrastInput" value="#FFFFFF"></div>
                 </div>
+                <button onclick="checkColorContrast()">Analyze Readability Ratio</button>
+                <div id="contrastPreviewBox" style="width: 100%; padding: 15px; margin-top: 15px; border-radius: 6px; border: 1px solid #dfe1e6; font-weight: bold; text-align: center;">Visual Sample Text Preview Box</div>
+                <div class="results" id="contrastResults" style="text-align: center;">Run metrics scanner.</div>
             </div>
 
         </div>
 
-        <!-- BOTTOM AD DISPLAY ZONE -->
-        <div class="ad-banner">ADVERTISEMENT SLOT (BOTTOM BANNER)</div>
-    </div>
-</body>
-</html>
-    <!-- JAVASCRIPT WEBASSEMBLY INTERFACE BRIDGE -->
-    <script>
-        // 1. Earth Atmospheric Drag Simulation Engine
+        <!-- POLICY / PRIVACY BLOCK FOR ADSENSE -->
+        <body class="card full-width" style="font-size: 12px; color: #5e6c84; margin-top: 40px; text-align: center;">
+            <h3>About This Open-Source Dashboard Sandbox & Privacy Policy</h3>
+            <p>This web sandbox calculator is an open-source educational utility matrix designed to track environmental drag profiles, vacuum kinetics, orbital break mechanics, and canvas structural readability rules.</p>
+      
+<script> 
+
+// FEATURE 1: EARTH AERODYNAMIC LOOP
 function calculateEarthDrop() {
     const height = parseFloat(document.getElementById('earthHeight').value);
     const weight = parseFloat(document.getElementById('earthWeight').value);
     const objectType = parseInt(document.getElementById('objectType').value);
-
-    if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) {
-        document.getElementById('earthResults').innerHTML = "Please enter valid positive values.";
-        return;
-    }
-
-    let drag_coefficient = 0.47; 
-    let cross_sectional_area = 0.004; 
-
-    if (objectType === 2) {
-        drag_coefficient = 1.05; 
-        cross_sectional_area = 0.05; 
-    } else if (objectType === 3) {
-        drag_coefficient = 1.00;
-        cross_sectional_area = 0.70; 
-    } else if (objectType === 4) {
-        drag_coefficient = 1.28;
-        cross_sectional_area = 0.06; 
-    }
-
-    const g = 9.81;            
-    const air_density = 1.225; 
     
-    let current_height = height;
-    let velocity = 0.0;
-    let time = 0.0;
-    let dt = 0.001; 
-
-    let terminalVel = Math.sqrt((2 * weight * g) / (air_density * cross_sectional_area * drag_coefficient));
-
+    if (height <= 0 || weight <= 0 || isNaN(height) || isNaN(weight)) return;
+    
+    let cd = 0.47, area = 0.004;
+    if (objectType === 2) { 
+        cd = 1.05;
+        area = 0.05; 
+    } else if (objectType === 3) {
+        cd = 1.00;
+        area = 0.70; 
+    } else if (objectType === 4) {
+        cd = 1.28; 
+        area = 0.06; 
+    }
+    
+    const g = 9.81, air_density = 1.225;
+    let current_height = height, velocity = 0.0, time = 0.0, dt = 0.001;
+    let terminalVel = Math.sqrt((2 * weight * g) / (air_density * area * cd));
+    
     while (current_height > 0) {
-        let force_gravity = weight * g;
-        let force_drag = 0.5 * air_density * (velocity * velocity) * drag_coefficient * cross_sectional_area;
-        let net_force = force_gravity - force_drag;
-        let acceleration = net_force / weight;
-
-        velocity += acceleration * dt;
+        let f_drag = 0.5 * air_density * (velocity * velocity) * cd * area;
+        let acc = (weight * g - f_drag) / weight;
+        velocity += acc * dt;
         current_height -= velocity * dt;
         time += dt;
-
         if (time > 2000.0) break;
     }
-
-    let kineticEnergy = 0.5 * weight * (velocity * velocity);
+    
+    let ke = 0.5 * weight * (velocity * velocity);
     let vacTime = Math.sqrt((2 * height) / g);
-    let delay = time - vacTime;
-
-    document.getElementById('earthResults').innerHTML = `
-        <strong>Terminal Velocity Limit:</strong> ${terminalVel.toFixed(2)} m/s<br>
-        <strong>Final Ground Impact Speed:</strong> ${velocity.toFixed(2)} m/s<br>
-        <strong>Total Falling Duration:</strong> ${time.toFixed(3)} seconds<br>
-        <strong>Kinetic Impact Energy:</strong> ${kineticEnergy.toFixed(0)} Joules<br>
-        <strong>Vacuum Fall Reference Time:</strong> ${vacTime.toFixed(3)} seconds<br>
-        <strong>Atmospheric Drag Delay:</strong> ${delay.toFixed(3)} seconds
-    `;
+    
+    // ADDED BACKTICKS HERE
+    document.getElementById('earthResults').innerHTML = `<strong>Terminal Velocity Limit:</strong> ${terminalVel.toFixed(2)} m/s<br> <strong>Final Impact Speed:</strong> ${velocity.toFixed(2)} m/s<br> <strong>Total Falling Duration:</strong> ${time.toFixed(3)} seconds<br> <strong>Kinetic Impact Energy:</strong> ${ke.toFixed(0)} Joules<br> <strong>Vacuum Reference Time:</strong> ${vacTime.toFixed(3)} seconds<br> <strong>Atmospheric Drag Delay:</strong> ${(time - vacTime).toFixed(3)} seconds`;
 }
 
-// 2. Celestial Vacuum Freefall Simulation Engine
-function calculateUniversalDrop() {
+// FEATURES 2 & 4: UNIVERSAL FLIGHT & ROCKET ESCAPE VELOCITY
+function calculateUniversalAndEscape() {
     const height = parseFloat(document.getElementById('universalHeight').value);
     const selectEl = document.getElementById('worldChoice');
     const gravity = parseFloat(selectEl.value);
     const planetName = selectEl.options[selectEl.selectedIndex].text.split(' (')[0];
-
-    if (height <= 0 || isNaN(height) || gravity <= 0) {
-        document.getElementById('universalResults').innerHTML = "Please enter a valid height.";
-        return;
-    }
     
-    const totalSeconds = Math.sqrt((2.0 * height) / gravity);
-
-    document.getElementById('universalResults').innerHTML = `
-        <strong>Target World:</strong> ${planetName}<br>
-        <strong>Calculated Free-fall Time:</strong> ${totalSeconds.toFixed(3)} seconds
-    `;
+    if (height <= 0 || isNaN(height)) return;
+    
+    // Fixed the layout tracking typo here
+    const fallTime = Math.sqrt((2.0 * height) / gravity);
+    
+    // Feature 4 Math (Planetary radii tracking)
+    const planetRadii = { 
+        "Mercury": 2439700,
+        "Venus": 6051800, 
+        "Earth": 6371000, 
+        "The Moon": 1737400, 
+        "Mars": 3389500, 
+        "Jupiter": 69911000, 
+        "Saturn": 58232000, 
+        "Uranus": 25362000, 
+        "Neptune": 24622000, 
+        "Pluto": 1188300 
+    };
+    
+    const radius = planetRadii[planetName] || 6371000;
+    const escapeVelMps = Math.sqrt(2 * gravity * radius);
+    
+    // ADDED BACKTICKS HERE
+    document.getElementById('universalResults').innerHTML = `<strong>Target World:</strong> ${planetName}<br> <strong>Vacuum Fall Duration:</strong> ${fallTime.toFixed(3)} seconds<br> <strong>Planetary Escape Speed:</strong> ${escapeVelMps.toFixed(0).toLocaleString()} m/s (${(escapeVelMps * 3.6).toFixed(0).toLocaleString()} km/h)`;
 }
 
-// 3. Matrix Color Paint Mixer Engine
-
-function mixColors() {
-    let choices = [
-        parseInt(document.getElementById('color1').value),
-        parseInt(document.getElementById('color2').value),
-        parseInt(document.getElementById('color3').value)
+// FEATURE 5: COSMIC WEIGHT SYSTEM
+function calculateCosmicWeights() {
+    const earthWeight = parseFloat(document.getElementById('cosmicWeightInput').value);
+    if (earthWeight <= 0 || isNaN(earthWeight)) return;
+    
+    const gravityRatios = [
+        { name: "Mercury", r: 0.38 }, 
+        { name: "Venus", r: 0.90 }, 
+        { name: "Earth", r: 1.00 },
+        { name: "The Moon", r: 0.165 }, 
+        { name: "Mars", r: 0.38 }, 
+        { name: "Jupiter", r: 2.53 },
+        { name: "Saturn", r: 1.06 }, 
+        { name: "Uranus", r: 0.89 }, 
+        { name: "Neptune", r: 1.14 }, 
+        { name: "Pluto", r: 0.06 }
     ];
-
-    // Digital definitions for your 5 primary selector paints
-    const paintProfiles = {
-        1: { r: 255, g: 0,   b: 0 },   // Red
-        2: { r: 255, g: 255, b: 0 },   // Yellow
-        3: { r: 0,   g: 0,   b: 255 }, // Blue
-        4: { r: 255, g: 255, b: 255 }, // White
-        5: { r: 0,   g: 0,   b: 0 }    // Black
-    };
-
-    // Calculate fluid mathematical averages
-    let totalR = 0, totalG = 0, totalB = 0;
-    choices.forEach(choice => {
-        totalR += paintProfiles[choice].r;
-        totalG += paintProfiles[choice].g;
-        totalB += paintProfiles[choice].b;
+    
+    // ADDED BACKTICKS TO LAYOUT STRING
+    let out = `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">`;
+    
+    // ADDED BACKTICKS INSIDE FOR_EACH TEMPLATE
+    gravityRatios.forEach(w => {
+        out += `<div style="background: #fff; padding: 10px; border-radius: 4px; border: 1px solid #dfe1e6; text-align: center;"><strong>${w.name}</strong><br>${(earthWeight * w.r).toFixed(2)}</div>`;
     });
+    
+    // ADDED BACKTICKS TO CLOSING TAG
+    out += `</div>`;
+    document.getElementById('cosmicResults').innerHTML = out;
+}
 
-    let finalR = Math.round(totalR / 3);
-    let finalG = Math.round(totalG / 3);
-    let finalB = Math.round(totalB / 3);
 
-    // Extensive Artistic Color Dictionary for Proximity Matching
-    const colorDictionary = [
-        { name: "Pure Crimson Red", r: 255, g: 0, b: 0 },
-        { name: "Sun Bright Yellow", r: 255, g: 255, b: 0 },
-        { name: "Deep Cobalt Blue", r: 0, g: 0, b: 255 },
-        { name: "Pure Titanium White", r: 255, g: 255, b: 255 },
-        { name: "Pitch Black", r: 0, g: 0, b: 0 },
-        { name: "Vivid Orange", r: 255, g: 128, b: 0 },
-        { name: "Classic Purple", r: 128, g: 0, b: 128 },
-        { name: "Forest Green", r: 0, g: 128, b: 0 },
-        { name: "Soft Pastel Peach", r: 255, g: 218, b: 185 },
-        { name: "Lavender Violet", r: 230, g: 230, b: 250 },
-        { name: "Pale Mint Green", r: 152, g: 255, b: 152 },
-        { name: "Sky Blue", r: 135, g: 206, b: 235 },
-        { name: "Bubblegum Pink", r: 255, g: 182, b: 193 },
-        { name: "Warm Cream / Off-White", r: 255, g: 253, b: 208 },
-        { name: "Deep Maroon", r: 128, g: 0, b: 0 },
-        { name: "Dark Mustard", r: 128, g: 128, b: 0 },
-        { name: "Classic Navy Blue", r: 0, g: 0, b: 128 },
-        { name: "Olive Drab", r: 85, g: 107, b: 47 },
-        { name: "Plum Purple", r: 48, g: 25, b: 52 },
-        { name: "Teal Turquoise", r: 0, g: 128, b: 128 },
-        { name: "Muted Terracotta Rose", r: 188, g: 143, b: 143 },
-        { name: "Desert Khaki / Tan", r: 195, g: 177, b: 225 },
-        { name: "Slate Blue-Gray", r: 112, g: 128, b: 144 },
-        { name: "Light Silver Gray", r: 211, g: 211, b: 211 },
-        { name: "Dark Charcoal", r: 54, g: 69, b: 79 },
-        { name: "Earthy Mud Brown", r: 92, g: 64, b: 51 }
-    ];
-
-    // Find the closest predefined name using the Distance Formula
-    let closestColorName = "";
-    let shortestDistance = Infinity;
-
-    colorDictionary.forEach(namedColor => {
-        let distance = Math.sqrt(
-            Math.pow(finalR - namedColor.r, 2) +
-            Math.pow(finalG - namedColor.g, 2) +
-            Math.pow(finalB - namedColor.b, 2)
-        );
-
-        if (distance < shortestDistance) {
-            shortestDistance = distance;
-            closestColorName = namedColor.name;
+// FEATURE 3: HYBRID UNIVERSAL COLOR FLUID BLENDER
+function mixColors() 
+{
+    let choices = [parseInt(document.getElementById('color1').value),
+                   parseInt(document.getElementById('color2').value), 
+                   parseInt(document.getElementById('color3').value)];
+    const paintProfiles = { 1: {r:255,g:0,b:0}, 
+                            2: {r:255,g:255,b:0}, 
+                            3: {r:0,g:0,b:255}, 
+                            4: {r:255,g:255,b:255}, 
+                            5: {r:0,g:0,b:0} 
+                        };
+    let totalR = 0, totalG = 0, totalB = 0;
+    choices.forEach(c => { totalR += paintProfiles[c].r; 
+                           totalG += paintProfiles[c].g; 
+                           totalB += paintProfiles[c].b; 
+                        });
+    let finalR = Math.round(totalR / 3), finalG = Math.round(totalG / 3), finalB = Math.round(totalB / 3);
+    const colorDictionary = [{ name: "Pure Crimson Red", r: 255, g: 0, b: 0 }, 
+                             { name: "Sun Bright Yellow", r: 255, g: 255, b: 0 }, 
+                             { name: "Deep Cobalt Blue", r: 0, g: 0, b: 255 }, 
+                             { name: "Pure Titanium White", r: 255, g: 255, b: 255 }, 
+                             { name: "Pitch Black", r: 0, g: 0, b: 0 }, 
+                             { name: "Vivid Orange", r: 255, g: 128, b: 0 }, 
+                             { name: "Classic Purple", r: 128, g: 0, b: 128 }, 
+                             { name: "Forest Green", r: 0, g: 128, b: 0 }, 
+                             { name: "Soft Pastel Peach", r: 255, g: 218, b: 185 }, 
+                             { name: "Lavender Violet", r: 230, g: 230, b: 250 }, 
+                             { name: "Pale Mint Green", r: 152, g: 255, b: 152 }, 
+                             { name: "Sky Blue", r: 135, g: 206, b: 235 }, 
+                             { name: "Bubblegum Pink", r: 255, g: 182, b: 193 }, 
+                             { name: "Warm Cream / Off-White", r: 255, g: 253, b: 208 }, 
+                             { name: "Deep Maroon", r: 128, g: 0, b: 0 }, 
+                             { name: "Dark Mustard", r: 128, g: 128, b: 0 }, 
+                             { name: "Classic Navy Blue", r: 0, g: 0, b: 128 }, 
+                             { name: "Olive Drab", r: 85, g: 107, b: 47 }, 
+                             { name: "Plum Purple", r: 48, g: 25, b: 52 }, 
+                             { name: "Teal Turquoise", r: 0, g: 128, b: 128 }, 
+                             { name: "Muted Terracotta Rose", r: 188, g: 143, b: 143 }, 
+                             { name: "Desert Khaki / Tan", r: 195, g: 177, b: 225 }, 
+                             { name: "Slate Blue-Gray", r: 112, g: 128, b: 144 }, 
+                             { name: "Light Silver Gray", r: 211, g: 211, b: 211 }, 
+                             { name: "Dark Charcoal", r: 54, g: 69, b: 79 }, 
+                             { name: "Earthy Mud Brown", r: 92, g: 64, b: 51 }
+                             ];
+                             
+    let closestName = "", shortestDistance = Infinity;
+    
+    colorDictionary.forEach(namedColor => 
+    {
+        let d = Math.sqrt(Math.pow(finalR - namedColor.r, 2) + Math.pow(finalG - namedColor.g, 2) + Math.pow(finalB - namedColor.b, 2));
+        if (d < shortestDistance) { 
+            shortestDistance = d; 
+            closestName = namedColor.name; 
         }
     });
-
-    // Format output strings and display visually
-    const hexColorString = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
     
-    document.getElementById('colorPreview').style.backgroundColor = hexColorString;
-    document.getElementById('colorResults').innerHTML = `
-        <strong>Exact Mix:</strong> RGB(${finalR}, ${finalG}, ${finalB}) | Hex: ${hexColorString}<br>
-        <strong>Closest Artistic Match:</strong> ${closestColorName}
-    `;
+    const hex = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
+    document.getElementById('colorPreview').style.backgroundColor = hex;
+    
+    // FIXED WITH BACKTICKS HERE: `...`
+    document.getElementById('colorResults').innerHTML = `<strong>Exact Coordinates:</strong> RGB(${finalR}, ${finalG}, ${finalB}) | Hex: ${hex}<br><strong>Proximity Map Label:</strong> ${closestName}`;
 }
 
+// FEATURE 6: CONTRAST METRICS
+function checkColorContrast() 
+{
+    const hexToRgb = (h) => 
+    {
+        let r = parseInt(h.slice(1,3), 16), 
+            g = parseInt(h.slice(3,5), 16), 
+            b = parseInt(h.slice(5,7), 16);
+            return isNaN(r) ? null : {r,g,b};
+    };
+    const getLum = (r, g, b) => 
+    {
+        let a = [r, g, b].map(v => { v /= 255; 
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); 
+        });
+        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    };
+    
+    const bgHex = document.getElementById('bgContrastInput').value, textHex = document.getElementById('textContrastInput').value;
+    const bg = hexToRgb(bgHex), text = hexToRgb(textHex);
+    if (!bg || !text) return;
+    
+    const ratio = (Math.max(getLum(bg.r,bg.g,bg.b), getLum(text.r,text.g,text.b)) + 0.05) / (Math.min(getLum(bg.r,bg.g,bg.b), getLum(text.r,text.g,text.b)) + 0.05);
+    let score = ratio >= 4.5 ? "PASS" : "FAIL";
+    
+    const preview = document.getElementById('contrastPreviewBox');
+    preview.style.backgroundColor = bgHex; 
+    preview.style.color = textHex;
+    
+    // FIXED WITH BACKTICKS HERE: `...`
+    document.getElementById('contrastResults').innerHTML = `<strong>Contrast Ratio:</strong> ${ratio.toFixed(2)} : 1<br><strong>WCAG Rating Diagnostics:</strong> ${score}`;
+}
 </script>
