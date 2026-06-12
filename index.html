@@ -241,13 +241,39 @@
     </div>
 
 <script>
+
 const canvas = document.getElementById('sandboxCanvas');
 const ctx = canvas.getContext('2d');
 const graphCanvas = document.getElementById('graphCanvas');
 const graphCtx = graphCanvas.getContext('2d');
 
+// 1. Scale function for crisp Retina text and graphics
+function setupRetinaCanvas(canvasElement) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvasElement.getBoundingClientRect();
+    
+    canvasElement.style.width = rect.width + 'px';
+    canvasElement.style.height = rect.height + 'px';
+    
+    canvasElement.width = rect.width * dpr;
+    canvasElement.height = rect.height * dpr;
+    
+    const context = canvasElement.getContext('2d');
+    context.scale(dpr, dpr);
+}
+
+// 2. Initialize high-res properties
+setupRetinaCanvas(canvas);
+setupRetinaCanvas(graphCanvas);
+
 let animationFrameId = null;
 let currentPlanetColor = '#141b2d'; 
+
+// Fixed bounds for unscaled coordinate tracking
+const sandboxWidth = 480;
+const sandboxHeight = 200;
+const graphWidth = 320;
+const graphHeight = 200;
 
 // Data Tracking Streams for Graphing
 let graphDataPoints = [];
@@ -257,17 +283,25 @@ let maxObservedVelocity = 10;
 let particles = [];
 const FLOOR_OFFSET = 65;
 
+// 3. Updated functions utilizing layout bounds
 function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Dynamically get the current responsive width and height
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
 }
 
 function drawSimulationBackground(surface = 'concrete') {
+    // Dynamically get layout bounds so the background stretches with the screen
+    const rect = canvas.getBoundingClientRect();
+    const currentWidth = rect.width;
+    const currentHeight = rect.height;
+
     ctx.fillStyle = currentPlanetColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, currentWidth, currentHeight);
     
     if (surface === 'water') {
         ctx.fillStyle = 'rgba(0, 168, 255, 0.35)';
-        ctx.fillRect(0, canvas.height - FLOOR_OFFSET, canvas.width, FLOOR_OFFSET);
+        ctx.fillRect(0, currentHeight - FLOOR_OFFSET, currentWidth, FLOOR_OFFSET);
         ctx.strokeStyle = '#00a8ff';
     } else if (surface === 'trampoline') {
         ctx.strokeStyle = '#e1b12c';
@@ -277,71 +311,98 @@ function drawSimulationBackground(surface = 'concrete') {
     
     ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height - FLOOR_OFFSET);
-    ctx.lineTo(canvas.width, canvas.height - FLOOR_OFFSET);
+    ctx.moveTo(0, currentHeight - FLOOR_OFFSET);
+    ctx.lineTo(currentWidth, currentHeight - FLOOR_OFFSET); // Stretches line perfectly edge-to-edge
     ctx.stroke();
 }
 
+
 // Draw static grid lines and titles onto the diagnostic graph canvas
 function initGraphLayout() {
-    graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+    // Dynamically fetch current layout size of the graph canvas
+    const rect = graphCanvas.getBoundingClientRect();
+    const currentGraphWidth = rect.width;
+    const currentGraphHeight = rect.height;
+
+    // Clear using layout dimensions
+    graphCtx.clearRect(0, 0, currentGraphWidth, currentGraphHeight);
     
-    // Background mesh
-    graphCtx.strokeStyle = '#1e272e';
+    // Draw grid lines
+    graphCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     graphCtx.lineWidth = 1;
-    for(let i = 20; i < graphCanvas.height; i += 30) {
+    for(let i = 20; i < currentGraphHeight; i += 30) {
         graphCtx.beginPath();
         graphCtx.moveTo(0, i);
-        graphCtx.lineTo(graphCanvas.width, i);
+        graphCtx.lineTo(currentGraphWidth, i);
         graphCtx.stroke();
     }
     
-    // Labels and graph parameters
-    graphCtx.fillStyle = '#5e6c84';
-    graphCtx.font = '9px monospace';
-    graphCtx.fillText('VELOCITY (m/s) vs TIME', 8, 15);
-    graphCtx.fillText('0 m/s', graphCanvas.width - 40, graphCanvas.height - 8);
+    // Render static grid labels
+    graphCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+    graphCtx.font = '10px sans-serif';
+    graphCtx.fillText('0 m/s', currentGraphWidth - 40, currentGraphHeight - 8);
 }
 
-// Live real-time trace path updating onto graph canvas
-function updateGraphDisplay(newVelocity) {
-    graphDataPoints.push(Math.abs(newVelocity));
-    if (graphDataPoints.length > graphCanvas.width) {
-        graphDataPoints.shift(); // Keep scrolling
-    }
 
-    // Auto-scale peak thresholds dynamically
-    if (Math.abs(newVelocity) > maxObservedVelocity) {
-        maxObservedVelocity = Math.abs(newVelocity) * 1.1;
-    }
+function updateGraphDisplay(currentVelocity) {
+    const rect = graphCanvas.getBoundingClientRect();
+    const currentGraphWidth = rect.width;
+    const currentGraphHeight = rect.height;
 
+    graphDataPoints.push(Math.abs(currentVelocity));
+    
+    if (Math.abs(currentVelocity) > maxObservedVelocity) {
+        maxObservedVelocity = Math.abs(currentVelocity) * 1.2;
+    }
+    
     initGraphLayout();
+    
+    if (graphDataPoints.length > currentGraphWidth) {
+        graphDataPoints.shift();
+    }
+    
+    if (graphDataPoints.length === 0) return;
 
-    if (graphDataPoints.length < 2) return;
-
-    graphCtx.strokeStyle = '#2ed573'; // Neon Green plotting stroke
-    graphCtx.lineWidth = 2;
-    graphCtx.beginPath();
+    // Create container paths for both stroke and fill mapping
+    const linePath = new Path2D();
+    const areaPath = new Path2D();
+    
+    // Bottom-left start coordinate for the filled area
+    areaPath.moveTo(0, currentGraphHeight - 15);
 
     for (let i = 0; i < graphDataPoints.length; i++) {
-        let xCoord = i * (graphCanvas.width / Math.max(graphCanvas.width, graphDataPoints.length));
+        let xCoord = i * (currentGraphWidth / Math.max(currentGraphWidth, graphDataPoints.length));
+        let normalizedY = (graphDataPoints[i] / maxObservedVelocity) * (currentGraphHeight - 30);
+        let yCoord = (currentGraphHeight - 15) - normalizedY;
         
-        // Map data points inversely to fit inside Canvas standard coordinates system
-        let normalizedY = (graphDataPoints[i] / maxObservedVelocity) * (graphCanvas.height - 30);
-        let yCoord = (graphCanvas.height - 15) - normalizedY;
-
         if (i === 0) {
-            graphCtx.moveTo(xCoord, yCoord);
+            linePath.moveTo(xCoord, yCoord);
+            areaPath.lineTo(xCoord, yCoord);
         } else {
-            graphCtx.lineTo(xCoord, yCoord);
+            linePath.lineTo(xCoord, yCoord);
+            areaPath.lineTo(xCoord, yCoord);
         }
     }
-    graphCtx.stroke();
+
+    // Close the area path to the bottom-right corner
+    const lastX = (graphDataPoints.length - 1) * (currentGraphWidth / Math.max(currentGraphWidth, graphDataPoints.length));
+    areaPath.lineTo(lastX, currentGraphHeight - 15);
+    areaPath.closePath();
+
+    // 1. Draw the Modern Fading Gradient Fill
+    const gradient = graphCtx.createLinearGradient(0, 0, 0, currentGraphHeight);
+    gradient.addColorStop(0, 'rgba(0, 168, 255, 0.25)'); // Bright at the peak
+    gradient.addColorStop(1, 'rgba(0, 168, 255, 0.00)'); // Fades out completely at the bottom
     
-    // Draw current speed indicator value flag text marker
-    graphCtx.fillStyle = '#2ed573';
-    graphCtx.fillText(`${Math.abs(newVelocity).toFixed(1)} m/s`, 8, graphCanvas.height - 8);
+    graphCtx.fillStyle = gradient;
+    graphCtx.fill(areaPath);
+
+    // 2. Draw the Sharp Top Stroke Line
+    graphCtx.strokeStyle = '#00a8ff';
+    graphCtx.lineWidth = 2;
+    graphCtx.stroke(linePath);
 }
+
 
 function createImpactFX(x, y, type) {
     particles = [];
@@ -386,6 +447,7 @@ function updateAndDrawParticles() {
 }
 
 
+
 function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, mass = 1) {
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
     
@@ -393,43 +455,49 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
     graphDataPoints = [];
     maxObservedVelocity = 15;
     initGraphLayout();
-
+    
     const radiusSize = parseFloat(document.getElementById('customObject').value);
     const surface = document.getElementById('surfaceType').value;
     const weather = document.getElementById('weatherType').value;
-
     let currentHeight = totalHeight;
+
+    // FIX: Get true visual layout dimensions instead of physical pixel counts
+    const sandboxRect = canvas.getBoundingClientRect();
+    const currentLayoutWidth = sandboxRect.width;
+    const currentLayoutHeight = sandboxRect.height;
+
     let velocity = 0;
-    let ballX = canvas.width / 2;
+    let ballX = currentLayoutWidth / 2; // FIX: Perfectly centers the ball dynamically
     let isSubmerged = false;
     let bounceCount = 0;
-    const dt = 0.05; 
-
+    const dt = 0.05;
+    
     document.getElementById('telStatus').innerText = "Status: Falling...";
     document.getElementById('telStatus').style.color = "#fbc531";
-
+    
     function frame() {
         const airDensity = 1.225;
         let weatherDragModifier = 1.0;
         
-        if (weather === 'headwind') weatherDragModifier = 2.5; 
-        if (weather === 'crosswind') ballX += 1.8; 
-
+        if (weather === 'headwind') weatherDragModifier = 2.5;
+        if (weather === 'crosswind') ballX += 1.8;
+        
         // 1. Calculate Air Drag vs Water Drag
         let forceDrag = 0.5 * airDensity * (velocity * velocity) * dragCoef * surfaceArea * weatherDragModifier;
         let acceleration = (mass * gravity - forceDrag) / mass;
         
         if (surface === 'water' && isSubmerged) {
-            const waterViscosity = 12.0; 
+            const waterViscosity = 12.0;
             let waterDragForce = waterViscosity * velocity;
-            let buoyancy = gravity * 0.4; 
+            let buoyancy = gravity * 0.4;
             acceleration = gravity - (waterDragForce / mass) - buoyancy;
         }
         
         velocity += acceleration * dt;
         currentHeight -= velocity * dt;
-
-        let baselineY = canvas.height - FLOOR_OFFSET;
+        
+        // FIX: Use currentLayoutHeight so the floor matches the background drawing perfectly
+        let baselineY = currentLayoutHeight - FLOOR_OFFSET;
         let startY = 25;
         
         // 2. Water Boundary Splash Detector
@@ -438,20 +506,20 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
             createImpactFX(ballX, baselineY, surface);
             velocity = velocity * 0.35; // Instant braking on impact
         }
-
+        
         // 3. Absolute Floor Boundaries
         let stopProgressHeight = 0;
         if (surface === 'water') {
             stopProgressHeight = -15; // Tank floor depth
         }
-
+        
         if (currentHeight <= stopProgressHeight) {
             currentHeight = stopProgressHeight;
             velocity = 0; // Absolute velocity kill
             
             if (surface === 'trampoline' && bounceCount < 3) {
-                velocity = -velocity * 0.65; 
-                currentHeight = 0.1; 
+                velocity = -velocity * 0.65;
+                currentHeight = 0.1;
                 bounceCount++;
                 createImpactFX(ballX, baselineY, surface);
             } else if (surface === 'concrete' && Math.abs(velocity) > 0.5) {
@@ -460,18 +528,18 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
                 document.getElementById('telStatus').style.color = "#e84118";
             }
         }
-
+        
         clearCanvas();
         drawSimulationBackground(surface);
-
+        
         // Update real-time graph
         updateGraphDisplay(velocity);
-
+        
         // 4. Map Coordinates
         let currentY;
         if (surface === 'water' && isSubmerged) {
-            let maxWaterTravel = FLOOR_OFFSET - radiusSize - 4; 
-            let sinkProgress = Math.abs(currentHeight) / 15; 
+            let maxWaterTravel = FLOOR_OFFSET - radiusSize - 4;
+            let sinkProgress = Math.abs(currentHeight) / 15;
             if (sinkProgress > 1) sinkProgress = 1;
             
             currentY = (baselineY - radiusSize) + (maxWaterTravel * sinkProgress);
@@ -481,7 +549,7 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
             if (progress < 0) progress = 0;
             currentY = startY + ((baselineY - radiusSize) - startY) * progress;
         }
-
+        
         // Draw Object
         ctx.fillStyle = '#4c9aff';
         ctx.shadowColor = '#0065ff';
@@ -489,19 +557,19 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
         ctx.beginPath();
         ctx.arc(ballX, currentY, radiusSize, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0; 
+        ctx.shadowBlur = 0;
 
+
+        
         updateAndDrawParticles();
-
+        
         document.getElementById('telVelocity').innerText = `Velocity: ${Math.abs(velocity).toFixed(2)} m/s`;
         document.getElementById('telHeight').innerText = `Height: ${Math.max(0, currentHeight).toFixed(2)} m`;
-
-        // 5. RELIABLE LOOP TERMINATOR
         
+        // 5. FIXED RELIABLE LOOP TERMINATOR
         if (currentHeight > stopProgressHeight || particles.length > 0) {
             animationFrameId = requestAnimationFrame(frame);
         } else {
-            // Force final resting state data entries
             velocity = 0;
             updateGraphDisplay(0);
             
@@ -513,9 +581,6 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
     }
     animationFrameId = requestAnimationFrame(frame);
 }
-
-
-
 
 
 
@@ -714,6 +779,34 @@ function autoFixContrast() {
 // Initial draw sequences
 drawSimulationBackground();
 initGraphLayout();
+
+// Throttle timer reference to optimize performance
+let resizeTimeout;
+
+window.addEventListener('resize', () => {
+    // Clear timeout if user is actively dragging window frame borders
+    clearTimeout(resizeTimeout);
+    
+    // Wait until user finishes resizing before recalculating
+    resizeTimeout = setTimeout(() => {
+        // Recalculate retina pixels for layouts
+        setupRetinaCanvas(canvas);
+        setupRetinaCanvas(graphCanvas);
+        
+        // Redraw current static frame background without breaking past states
+        const surface = document.getElementById('surfaceType')?.value || 'concrete';
+        
+        // If simulation is not actively running, repaint static environments cleanly
+        if (!animationFrameId) {
+            clearCanvas();
+            drawSimulationBackground(surface);
+            initGraphLayout();
+        }
+    }, 150); // 150ms buffer time
+});
+
+
+
 </script>
 </body>
 </html>
