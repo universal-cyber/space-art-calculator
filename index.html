@@ -80,14 +80,11 @@
     width: 100%; 
     height: 100px; 
     border-radius: 6px; 
-    border: 1px solid var(--border); 
+    border: 2px solid #ffffff; 
     margin-top: 15px; 
-    background-color: #8B8589; 
+    box-sizing: border-box;
     
-    /* ❌ FORCE OVERRIDE DARK MODE SCHEMES */
-    color-scheme: light !important;
-    forced-color-adjust: none !important;
-    filter: none !important;
+   
 }
 
 
@@ -227,7 +224,7 @@
                     </div>
                 </div>
                 <button onclick="mixColors()">Blend Paint Elements</button>
-                <div class="preview-box" id="colorPreview"></div>
+                <canvas class="preview-box" id="colorPreview" width="400" height="100"></canvas>
                 <div class="results" id="colorResults" style="text-align: center;">Run blending matrix to compute proximity maps.</div>
             </div>
 
@@ -245,7 +242,7 @@
                 </div>
                 <button onclick="checkColorContrast()">Analyze Readability Ratio</button>
                 <button id="fixContrastBtn" class="secondary" style="display:none;" onclick="autoFixContrast()">Auto-Optimize Text Color</button>
-                <div id="contrastPreviewBox" style="width: 100%; padding: 15px; margin-top: 15px; border-radius: 6px; border: 1px solid #dfe1e6; font-weight: bold; text-align: center;">Visual Sample Text Preview Box</div>
+                <canvas id="contrastPreviewCanvas" width="450" height="80" style="width: 100%; max-width: 100%; margin-top: 15px; border-radius: 6px; border: 2px solid #ffffff; box-sizing: border-box;"></canvas>
                 <div class="results" id="contrastResults" style="text-align: center;">Run metrics scanner.</div>
             </div>
         </div>
@@ -717,9 +714,19 @@ function mixColors() {
         if (d < shortestDistance) { shortestDistance = d; closestName = namedColor.name; }
     });
     
-    const hex = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
-    document.getElementById('colorPreview').style.backgroundColor = hex;
+   const hex = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
+    
+    // RENDER DIRECTLY VIA CANVAS TO BYPASS FORCED MOBILE COLOR FILTERS
+    const colorCanvas = document.getElementById('colorPreview');
+    const colorCtx = colorCanvas.getContext('2d');
+    
+    // Flood fill the canvas window with your calculated color
+    colorCtx.fillStyle = hex;
+    colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
+    
     document.getElementById('colorResults').innerHTML = `<strong>Exact Coordinates:</strong> RGB(${finalR}, ${finalG}, ${finalB}) | Hex: ${hex}<br><strong>Proximity Map Label:</strong> ${closestName}`;
+
+
 }
 
 const hexToRgb = (h) => {
@@ -742,6 +749,7 @@ const getContrastRatio = (bg, text) => {
     return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 };
 
+
 function checkColorContrast() {
     let bgHex = document.getElementById('bgContrastInput').value;
     let textHex = document.getElementById('textContrastInput').value;
@@ -755,14 +763,29 @@ function checkColorContrast() {
     const ratio = getContrastRatio(bg, text);
     let score = ratio >= 4.5 ? "PASS" : "FAIL";
     
-    const preview = document.getElementById('contrastPreviewBox');
-    preview.style.backgroundColor = bgHex; 
-    preview.style.color = textHex;
+    // --- NEW CANVAS PROTECTED RENDERING CORE ---
+    const contrastCanvas = document.getElementById('contrastPreviewCanvas');
+    const cCtx = contrastCanvas.getContext('2d');
+    
+    // 1. Fill background color
+    cCtx.fillStyle = bgHex;
+    cCtx.fillRect(0, 0, contrastCanvas.width, contrastCanvas.height);
+    
+    // 2. Render text directly inside bitmap layer
+    cCtx.fillStyle = textHex;
+    cCtx.font = "bold 18px -apple-system, BlinkMacSystemFont, sans-serif";
+    cCtx.textAlign = "center";
+    cCtx.textBaseline = "middle";
+    cCtx.fillText("Visual Sample Text Preview Box", contrastCanvas.width / 2, contrastCanvas.height / 2);
+    // -------------------------------------------
     
     document.getElementById('contrastResults').innerHTML = `<strong>Contrast Ratio:</strong> ${ratio.toFixed(2)} : 1<br><strong>WCAG Rating Diagnostics:</strong> ${score}`;
-    
     document.getElementById('fixContrastBtn').style.display = (score === "FAIL") ? "block" : "none";
 }
+
+
+
+
 
 function autoFixContrast() {
     let bgHex = document.getElementById('bgContrastInput').value;
@@ -820,6 +843,25 @@ window.addEventListener('resize', () => {
         }
     }, 150); // 150ms buffer time
 });
+
+
+// Initial draw sequences
+drawSimulationBackground();
+initGraphLayout();
+
+// Draw default setup for contrast diagnostic canvas
+const initContrastCanvas = document.getElementById('contrastPreviewCanvas');
+if (initContrastCanvas) {
+    const cCtx = initContrastCanvas.getContext('2d');
+    cCtx.fillStyle = '#1e272e';
+    cCtx.fillRect(0, 0, initContrastCanvas.width, initContrastCanvas.height);
+    cCtx.fillStyle = '#ffffff';
+    cCtx.font = "bold 18px sans-serif";
+    cCtx.textAlign = "center";
+    cCtx.textBaseline = "middle";
+    cCtx.fillText("Visual Sample Text Preview Box", initContrastCanvas.width / 2, initContrastCanvas.height / 2);
+}
+
 
 
 
