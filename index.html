@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-       <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DP05LMJ7VH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DP05LMJ7VH');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP05LMJ7VH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DP05LMJ7VH');
+    </script>
     
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultimate Planetary &amp; Art Sandbox Simulator</title>
@@ -67,27 +62,19 @@
         @media (min-width: 600px) {
             .viewport-row { grid-template-columns: 3fr 2fr; }
         }
-
         canvas { background: #141b2d; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); width: 100%; height: 200px; transition: background 0.5s ease; }
         #graphCanvas { background: #0d111a; border: 1px solid #1e272e; }
-
         .telemetry { width: 100%; max-width: 800px; display: flex; justify-content: space-between; color: #4c9aff; font-family: monospace; font-size: 12px; margin-top: 12px; flex-wrap: wrap; gap: 5px; }
-
         .color-selectors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-
-       .preview-box { 
-    width: 100%; 
-    height: 100px; 
-    border-radius: 6px; 
-    border: 2px solid #ffffff; 
-    margin-top: 15px; 
-    box-sizing: border-box;
-    
-   
-}
-
-
+        .preview-box { 
+            width: 100%; 
+            height: 100px; 
+            border-radius: 6px; 
+            border: 2px solid #ffffff; 
+            margin-top: 15px; 
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>
@@ -120,7 +107,6 @@
                 <button onclick="calculateEarthDrop()">Simulate Physics</button>
                 <div class="results" id="earthResults">Fill parameters to calculate drag.</div>
             </div>
-
             <div class="card">
                 <h2>🪐 Universal Vacuum &amp; Rocket Matrix</h2>
                 <div class="form-group">
@@ -145,7 +131,6 @@
                 <button onclick="calculateUniversalAndEscape()">Run Physics Engines</button>
                 <div class="results" id="universalResults">Select a world to execute simulations.</div>
             </div>
-
             <div class="card full-width">
                 <h2>🎬 Real-Time Physics Telemetry Viewport (With Graph Matrix)</h2>
                 
@@ -176,7 +161,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="visualizer-container">
                     <div class="viewport-row">
                         <canvas id="sandboxCanvas" width="480" height="200"></canvas>
@@ -190,9 +174,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="card full-width">
-                <h2>🌌 Cosmic Weight Distribution Scale</h2>
+                <h2>`🌌 Cosmic Weight Distribution Scale</h2>
                 <div class="form-group">
                     <label for="cosmicWeightInput">Your Weight on Earth (lbs or kg):</label>
                     <input type="number" id="cosmicWeightInput" value="70" placeholder="e.g. 70">
@@ -200,7 +183,6 @@
                 <button onclick="calculateCosmicWeights()">Compute Multi-Planetary Distribution</button>
                 <div class="results" id="cosmicResults">Your universal weight metrics will appear here.</div>
             </div>
-
             <div class="card full-width">
                 <h2>🎨 Fluid Paint Mixer (Universal Custom Engine)</h2>
                 <div class="form-group color-selectors">
@@ -213,7 +195,7 @@
                     <div>
                         <label for="color2">Paint 2:</label>
                         <select id="color2" title="Select Color Component 2">
-                            <option value="1">Red</option><option value="2" selected>Yellow</option><option value="3">Blue</option><option value="4">White</option><option value="5">Black</option>
+                            <option value="1">Red</option><option value="2" selected>Yellow</option><option value="3">Blue</option><option value="4" selected>White</option><option value="5">Black</option>
                         </select>
                     </div>
                     <div>
@@ -227,7 +209,6 @@
                 <canvas class="preview-box" id="colorPreview" width="400" height="100"></canvas>
                 <div class="results" id="colorResults" style="text-align: center;">Run blending matrix to compute proximity maps.</div>
             </div>
-
             <div class="card full-width">
                 <h2>🔍 UI Accessibility Contrast Diagnostics (WCAG Compliance)</h2>
                 <div class="form-group color-selectors">
@@ -246,23 +227,22 @@
                 <div class="results" id="contrastResults" style="text-align: center;">Run metrics scanner.</div>
             </div>
         </div>
-
         <div class="card full-width" style="font-size: 12px; color: #5e6c84; margin-top: 40px; text-align: center;">
             <h3>About This Open-Source Dashboard Sandbox &amp; Privacy Policy</h3>
             <p>This web sandbox calculator is an open-source educational utility matrix designed to track environmental drag profiles, vacuum kinetics, orbital break mechanics, and canvas structural readability rules.</p>
         </div>
     </div>
-
 <script>
-
 const canvas = document.getElementById('sandboxCanvas');
 const ctx = canvas.getContext('2d');
 const graphCanvas = document.getElementById('graphCanvas');
 const graphCtx = graphCanvas.getContext('2d');
 
-// 1. Scale function for crisp Retina text and graphics
+let dpr = window.devicePixelRatio || 1;
+
+// FIXED: Reset transformation context matrix before re-scaling to prevent text-shrinking bugs
 function setupRetinaCanvas(canvasElement) {
-    const dpr = window.devicePixelRatio || 1;
+    dpr = window.devicePixelRatio || 1;
     const rect = canvasElement.getBoundingClientRect();
     
     canvasElement.style.width = rect.width + 'px';
@@ -272,43 +252,33 @@ function setupRetinaCanvas(canvasElement) {
     canvasElement.height = rect.height * dpr;
     
     const context = canvasElement.getContext('2d');
+    context.setTransform(1, 0, 0, 1, 0, 0); // Clear context mapping history
     context.scale(dpr, dpr);
 }
 
-// 2. Initialize high-res properties
+// Initialize high-res properties
 setupRetinaCanvas(canvas);
 setupRetinaCanvas(graphCanvas);
 
 let animationFrameId = null;
 let currentPlanetColor = '#141b2d'; 
 
-// Fixed bounds for unscaled coordinate tracking
-const sandboxWidth = 480;
-const sandboxHeight = 200;
-const graphWidth = 320;
-const graphHeight = 200;
-
-// Data Tracking Streams for Graphing
+// Tracks logical dimensions decoupled from layout pixel resizing
 let graphDataPoints = [];
 let maxObservedVelocity = 10; 
-
-// Particle system array for impact FX
 let particles = [];
 const FLOOR_OFFSET = 65;
 
-// 3. Updated functions utilizing layout bounds
 function clearCanvas() {
-    // Dynamically get the current responsive width and height
     const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
 }
 
 function drawSimulationBackground(surface = 'concrete') {
-    // Dynamically get layout bounds so the background stretches with the screen
     const rect = canvas.getBoundingClientRect();
     const currentWidth = rect.width;
     const currentHeight = rect.height;
-
+    
     ctx.fillStyle = currentPlanetColor;
     ctx.fillRect(0, 0, currentWidth, currentHeight);
     
@@ -325,22 +295,17 @@ function drawSimulationBackground(surface = 'concrete') {
     ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.moveTo(0, currentHeight - FLOOR_OFFSET);
-    ctx.lineTo(currentWidth, currentHeight - FLOOR_OFFSET); // Stretches line perfectly edge-to-edge
+    ctx.lineTo(currentWidth, currentHeight - FLOOR_OFFSET);
     ctx.stroke();
 }
 
-
-// Draw static grid lines and titles onto the diagnostic graph canvas
 function initGraphLayout() {
-    // Dynamically fetch current layout size of the graph canvas
     const rect = graphCanvas.getBoundingClientRect();
     const currentGraphWidth = rect.width;
     const currentGraphHeight = rect.height;
-
-    // Clear using layout dimensions
+    
     graphCtx.clearRect(0, 0, currentGraphWidth, currentGraphHeight);
     
-    // Draw grid lines
     graphCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     graphCtx.lineWidth = 1;
     for(let i = 20; i < currentGraphHeight; i += 30) {
@@ -350,18 +315,15 @@ function initGraphLayout() {
         graphCtx.stroke();
     }
     
-    // Render static grid labels
     graphCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
     graphCtx.font = '10px sans-serif';
     graphCtx.fillText('0 m/s', currentGraphWidth - 40, currentGraphHeight - 8);
 }
 
-
 function updateGraphDisplay(currentVelocity) {
     const rect = graphCanvas.getBoundingClientRect();
     const currentGraphWidth = rect.width;
     const currentGraphHeight = rect.height;
-
     graphDataPoints.push(Math.abs(currentVelocity));
     
     if (Math.abs(currentVelocity) > maxObservedVelocity) {
@@ -375,14 +337,11 @@ function updateGraphDisplay(currentVelocity) {
     }
     
     if (graphDataPoints.length === 0) return;
-
-    // Create container paths for both stroke and fill mapping
+    
     const linePath = new Path2D();
     const areaPath = new Path2D();
     
-    // Bottom-left start coordinate for the filled area
     areaPath.moveTo(0, currentGraphHeight - 15);
-
     for (let i = 0; i < graphDataPoints.length; i++) {
         let xCoord = i * (currentGraphWidth / Math.max(currentGraphWidth, graphDataPoints.length));
         let normalizedY = (graphDataPoints[i] / maxObservedVelocity) * (currentGraphHeight - 30);
@@ -396,26 +355,22 @@ function updateGraphDisplay(currentVelocity) {
             areaPath.lineTo(xCoord, yCoord);
         }
     }
-
-    // Close the area path to the bottom-right corner
+    
     const lastX = (graphDataPoints.length - 1) * (currentGraphWidth / Math.max(currentGraphWidth, graphDataPoints.length));
     areaPath.lineTo(lastX, currentGraphHeight - 15);
     areaPath.closePath();
-
-    // 1. Draw the Modern Fading Gradient Fill
+    
     const gradient = graphCtx.createLinearGradient(0, 0, 0, currentGraphHeight);
-    gradient.addColorStop(0, 'rgba(0, 168, 255, 0.25)'); // Bright at the peak
-    gradient.addColorStop(1, 'rgba(0, 168, 255, 0.00)'); // Fades out completely at the bottom
+    gradient.addColorStop(0, 'rgba(0, 168, 255, 0.25)');
+    gradient.addColorStop(1, 'rgba(0, 168, 255, 0.00)');
     
     graphCtx.fillStyle = gradient;
     graphCtx.fill(areaPath);
-
-    // 2. Draw the Sharp Top Stroke Line
+    
     graphCtx.strokeStyle = '#00a8ff';
     graphCtx.lineWidth = 2;
     graphCtx.stroke(linePath);
 }
-
 
 function createImpactFX(x, y, type) {
     particles = [];
@@ -424,7 +379,6 @@ function createImpactFX(x, y, type) {
     if (type === 'concrete') color = '#fbc531'; 
     if (type === 'water') color = '#00a8ff';    
     if (type === 'trampoline') color = '#e1b12c'; 
-
     for (let i = 0; i < count; i++) {
         particles.push({
             x: x,
@@ -439,14 +393,15 @@ function createImpactFX(x, y, type) {
 }
 
 function updateAndDrawParticles() {
-    particles.forEach((p, index) => {
+    for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
         p.vy += 0.2; 
         p.alpha -= 0.02;
         
         if (p.alpha <= 0) {
-            particles.splice(index, 1);
+            particles.splice(i, 1);
         } else {
             ctx.save();
             ctx.globalAlpha = p.alpha;
@@ -456,15 +411,12 @@ function updateAndDrawParticles() {
             ctx.fill();
             ctx.restore();
         }
-    });
+    }
 }
-
-
 
 function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, mass = 1) {
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
     
-    // Reset graph tracking data
     graphDataPoints = [];
     maxObservedVelocity = 15;
     initGraphLayout();
@@ -474,16 +426,16 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
     const weather = document.getElementById('weatherType').value;
     let currentHeight = totalHeight;
 
-    // FIX: Get true visual layout dimensions instead of physical pixel counts
     const sandboxRect = canvas.getBoundingClientRect();
     const currentLayoutWidth = sandboxRect.width;
     const currentLayoutHeight = sandboxRect.height;
-
     let velocity = 0;
-    let ballX = currentLayoutWidth / 2; // FIX: Perfectly centers the ball dynamically
+    let ballX = currentLayoutWidth / 2; 
     let isSubmerged = false;
     let bounceCount = 0;
-    const dt = 0.05;
+    
+    // FIXED: Reduced time delta frame step size to stabilize fluid viscosity arithmetic drops
+    const dt = 0.02; 
     
     document.getElementById('telStatus').innerText = "Status: Falling...";
     document.getElementById('telStatus').style.color = "#fbc531";
@@ -495,7 +447,6 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
         if (weather === 'headwind') weatherDragModifier = 2.5;
         if (weather === 'crosswind') ballX += 1.8;
         
-        // 1. Calculate Air Drag vs Water Drag
         let forceDrag = 0.5 * airDensity * (velocity * velocity) * dragCoef * surfaceArea * weatherDragModifier;
         let acceleration = (mass * gravity - forceDrag) / mass;
         
@@ -509,26 +460,22 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
         velocity += acceleration * dt;
         currentHeight -= velocity * dt;
         
-        // FIX: Use currentLayoutHeight so the floor matches the background drawing perfectly
         let baselineY = currentLayoutHeight - FLOOR_OFFSET;
         let startY = 25;
         
-        // 2. Water Boundary Splash Detector
         if (surface === 'water' && currentHeight <= 0 && !isSubmerged) {
             isSubmerged = true;
             createImpactFX(ballX, baselineY, surface);
-            velocity = velocity * 0.35; // Instant braking on impact
+            velocity = velocity * 0.35; 
         }
         
-        // 3. Absolute Floor Boundaries
         let stopProgressHeight = 0;
         if (surface === 'water') {
-            stopProgressHeight = -15; // Tank floor depth
+            stopProgressHeight = -15; 
         }
         
         if (currentHeight <= stopProgressHeight) {
             currentHeight = stopProgressHeight;
-            velocity = 0; // Absolute velocity kill
             
             if (surface === 'trampoline' && bounceCount < 3) {
                 velocity = -velocity * 0.65;
@@ -536,19 +483,19 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
                 bounceCount++;
                 createImpactFX(ballX, baselineY, surface);
             } else if (surface === 'concrete' && Math.abs(velocity) > 0.5) {
+                velocity = 0;
                 createImpactFX(ballX, baselineY, surface);
                 document.getElementById('telStatus').innerText = "Status: IMPACT CRASH!";
                 document.getElementById('telStatus').style.color = "#e84118";
+            } else {
+                velocity = 0;
             }
         }
         
         clearCanvas();
         drawSimulationBackground(surface);
-        
-        // Update real-time graph
         updateGraphDisplay(velocity);
         
-        // 4. Map Coordinates
         let currentY;
         if (surface === 'water' && isSubmerged) {
             let maxWaterTravel = FLOOR_OFFSET - radiusSize - 4;
@@ -563,7 +510,6 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
             currentY = startY + ((baselineY - radiusSize) - startY) * progress;
         }
         
-        // Draw Object
         ctx.fillStyle = '#4c9aff';
         ctx.shadowColor = '#0065ff';
         ctx.shadowBlur = 12;
@@ -571,18 +517,19 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
         ctx.arc(ballX, currentY, radiusSize, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
-
-
         
         updateAndDrawParticles();
         
         document.getElementById('telVelocity').innerText = `Velocity: ${Math.abs(velocity).toFixed(2)} m/s`;
         document.getElementById('telHeight').innerText = `Height: ${Math.max(0, currentHeight).toFixed(2)} m`;
         
-        // 5. FIXED RELIABLE LOOP TERMINATOR
-        if (currentHeight > stopProgressHeight || particles.length > 0) {
+        let waterFloorReached = (surface === 'water' && currentHeight <= stopProgressHeight);
+        let normalSettled = (surface !== 'water' && currentHeight <= 0 && Math.abs(velocity) <= 0.1);
+
+        if (!waterFloorReached && !normalSettled || particles.length > 0) {
             animationFrameId = requestAnimationFrame(frame);
         } else {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
             velocity = 0;
             updateGraphDisplay(0);
             
@@ -594,8 +541,6 @@ function startVisualDrop(totalHeight, gravity, dragCoef = 0, surfaceArea = 0, ma
     }
     animationFrameId = requestAnimationFrame(frame);
 }
-
-
 
 function calculateEarthDrop() {
     const height = parseFloat(document.getElementById('earthHeight').value);
@@ -654,7 +599,6 @@ function calculateUniversalAndEscape() {
         "Neptune": "#0b3c5d", "Pluto": "#1c2833"
     };
     currentPlanetColor = spaceColors[planetName] || '#141b2d';
-
     const radius = planetRadii[planetName] || 6371000;
     const escapeVelMps = Math.sqrt(2 * gravity * radius);
     
@@ -714,19 +658,15 @@ function mixColors() {
         if (d < shortestDistance) { shortestDistance = d; closestName = namedColor.name; }
     });
     
-   const hex = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
+    const hex = "#" + ((1 << 24) + (finalR << 16) + (finalG << 8) + finalB).toString(16).slice(1).toUpperCase();
     
-    // RENDER DIRECTLY VIA CANVAS TO BYPASS FORCED MOBILE COLOR FILTERS
     const colorCanvas = document.getElementById('colorPreview');
     const colorCtx = colorCanvas.getContext('2d');
     
-    // Flood fill the canvas window with your calculated color
     colorCtx.fillStyle = hex;
     colorCtx.fillRect(0, 0, colorCanvas.width, colorCanvas.height);
     
     document.getElementById('colorResults').innerHTML = `<strong>Exact Coordinates:</strong> RGB(${finalR}, ${finalG}, ${finalB}) | Hex: ${hex}<br><strong>Proximity Map Label:</strong> ${closestName}`;
-
-
 }
 
 const hexToRgb = (h) => {
@@ -749,7 +689,6 @@ const getContrastRatio = (bg, text) => {
     return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 };
 
-
 function checkColorContrast() {
     let bgHex = document.getElementById('bgContrastInput').value;
     let textHex = document.getElementById('textContrastInput').value;
@@ -763,29 +702,21 @@ function checkColorContrast() {
     const ratio = getContrastRatio(bg, text);
     let score = ratio >= 4.5 ? "PASS" : "FAIL";
     
-    // --- NEW CANVAS PROTECTED RENDERING CORE ---
     const contrastCanvas = document.getElementById('contrastPreviewCanvas');
     const cCtx = contrastCanvas.getContext('2d');
     
-    // 1. Fill background color
     cCtx.fillStyle = bgHex;
     cCtx.fillRect(0, 0, contrastCanvas.width, contrastCanvas.height);
     
-    // 2. Render text directly inside bitmap layer
     cCtx.fillStyle = textHex;
     cCtx.font = "bold 18px -apple-system, BlinkMacSystemFont, sans-serif";
     cCtx.textAlign = "center";
     cCtx.textBaseline = "middle";
     cCtx.fillText("Visual Sample Text Preview Box", contrastCanvas.width / 2, contrastCanvas.height / 2);
-    // -------------------------------------------
     
     document.getElementById('contrastResults').innerHTML = `<strong>Contrast Ratio:</strong> ${ratio.toFixed(2)} : 1<br><strong>WCAG Rating Diagnostics:</strong> ${score}`;
     document.getElementById('fixContrastBtn').style.display = (score === "FAIL") ? "block" : "none";
 }
-
-
-
-
 
 function autoFixContrast() {
     let bgHex = document.getElementById('bgContrastInput').value;
@@ -793,23 +724,28 @@ function autoFixContrast() {
     
     let bg = hexToRgb(bgHex), text = hexToRgb(textHex);
     if (!bg || !text) return;
-
+    
     const bgLum = getLum(bg.r, bg.g, bg.b);
-    let factor = (bgLum > 0.5) ? 0.92 : 1.08; 
+    
+    // FIXED: Uses uniform direct increments/decrements to avoid infinite rounding traps
+    let step = (bgLum > 0.5) ? -5 : 5; 
     let loops = 0;
-
-    while (getContrastRatio(bg, text) < 4.5 && loops < 100) {
-        text.r = Math.min(255, Math.max(0, Math.round(text.r * factor)));
-        text.g = Math.min(255, Math.max(0, Math.round(text.g * factor)));
-        text.b = Math.min(255, Math.max(0, Math.round(text.b * factor)));
+    
+    while (getContrastRatio(bg, text) < 4.5 && loops < 150) {
+        text.r = Math.min(255, Math.max(0, text.r + step));
+        text.g = Math.min(255, Math.max(0, text.g + step));
+        text.b = Math.min(255, Math.max(0, text.b + step));
         
-        if(text.r === 0 && text.g === 0 && text.b === 0 || text.r === 255 && text.g === 255 && text.b === 255) {
-            if(bgLum > 0.5) { text = {r:0,g:0,b:0}; } else { text = {r:255,g:255,b:255}; }
+        if ((text.r === 0 && text.g === 0 && text.b === 0) || (text.r === 255 && text.g === 255 && text.b === 255)) {
             break;
         }
         loops++;
     }
-
+    
+    if (getContrastRatio(bg, text) < 4.5) {
+        text = (bgLum > 0.5) ? {r:0,g:0,b:0} : {r:255,g:255,b:255};
+    }
+    
     const newTextHex = "#" + ((1 << 24) + (text.r << 16) + (text.g << 8) + text.b).toString(16).slice(1).toUpperCase();
     document.getElementById('textContrastInput').value = newTextHex;
     checkColorContrast();
@@ -819,37 +755,7 @@ function autoFixContrast() {
 drawSimulationBackground();
 initGraphLayout();
 
-// Throttle timer reference to optimize performance
-let resizeTimeout;
-
-window.addEventListener('resize', () => {
-    // Clear timeout if user is actively dragging window frame borders
-    clearTimeout(resizeTimeout);
-    
-    // Wait until user finishes resizing before recalculating
-    resizeTimeout = setTimeout(() => {
-        // Recalculate retina pixels for layouts
-        setupRetinaCanvas(canvas);
-        setupRetinaCanvas(graphCanvas);
-        
-        // Redraw current static frame background without breaking past states
-        const surface = document.getElementById('surfaceType')?.value || 'concrete';
-        
-        // If simulation is not actively running, repaint static environments cleanly
-        if (!animationFrameId) {
-            clearCanvas();
-            drawSimulationBackground(surface);
-            initGraphLayout();
-        }
-    }, 150); // 150ms buffer time
-});
-
-
-// Initial draw sequences
-drawSimulationBackground();
-initGraphLayout();
-
-// Draw default setup for contrast diagnostic canvas
+// Setup initial view state for contrast diagnostic canvas
 const initContrastCanvas = document.getElementById('contrastPreviewCanvas');
 if (initContrastCanvas) {
     const cCtx = initContrastCanvas.getContext('2d');
@@ -862,9 +768,23 @@ if (initContrastCanvas) {
     cCtx.fillText("Visual Sample Text Preview Box", initContrastCanvas.width / 2, initContrastCanvas.height / 2);
 }
 
-
-
-
+// Throttle timer reference to optimize performance
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        setupRetinaCanvas(canvas);
+        setupRetinaCanvas(graphCanvas);
+        
+        const surface = document.getElementById('surfaceType')?.value || 'concrete';
+        
+        if (!animationFrameId) {
+            clearCanvas();
+            drawSimulationBackground(surface);
+            initGraphLayout();
+        }
+    }, 150);
+});
 </script>
 </body>
 </html>
