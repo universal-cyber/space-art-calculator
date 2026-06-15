@@ -1,51 +1,153 @@
-# 🌍 Ultimate Planetary & Art Sandbox Simulator
+# 🌍 Space Art Calculator
 
-An interactive, high-performance web dashboard sandbox combining real-time planetary physics modeling, hydrodynamic fluid drag simulations, a digital paint-mixing engine, and WCAG 2.0 color accessibility diagnostics. 
+> An interactive physics simulator + artistic color mixer + accessibility validator, all in one elegant single-file web app.
 
-Built entirely as a responsive, lightweight, single-file native application.
-
-## 🚀 Live Features
-
-### 🎬 Real-Time Physics Telemetry Viewport
-* **Dynamic Environment Modeling:** Run calculations for atmospheric drag profiles on Earth or escape velocities across 10 different celestial bodies (Mercury, Venus, Mars, Jupiter, etc.).
-* **Hydrodynamic Fluid Drag:** Simulates terminal velocity changes, deep water buoyancy, elastic trampoline bounces, and concrete impact surface matrices.
-* **Vector Graph Matrix:** A real-time rendering engine that logs velocity telemetry onto a dynamically scaling canvas path.
-* **Weather Vectors:** Simulates structural interference from crosswinds and severe headwinds on falling masses.
-
-### 🎨 Fluid Paint Mixer (Custom Logic Engine)
-* Uses multi-channel RGB vector averaging to simulate physical medium blending.
-* Implements a 3D Euclidean distance formula ($\sqrt{\Delta R^2 + \Delta G^2 + \Delta B^2}$) to map mixed hex values against a color dictionary, auto-labeling the closest human-readable shade name.
-
-### 🔍 UI Accessibility Contrast Diagnostics
-* Formulates relative luminance tracking following official sRGB non-linear gamma expansions ($0.2126R + 0.7152G + 0.0722B$).
-* Computes real-time WCAG 2.0 contrast ratios to output definitive reading PASS/FAIL diagnostics.
-* Includes an smart contrast auto-optimizer fallback function.
+**[🚀 Try it Live](https://universal-cyber.github.io/space-art-calculator/)** • **[View Code](#-how-to-run-locally)** • **[Give Feedback](#-feedback--contributions)**
 
 ---
 
-## 🛠️ Advanced Technical Challenges Solved
+## ✨ What Is This?
 
-### 📱 Force-Dark Mode Canvas Shielding
-* **The Problem:** Aggressive system-level mobile browser "Force Dark Mode" overrides and accessibility filters aggressively invert or distort raw CSS background colors, ruining the accuracy of paint mixing and contrast diagnostic previews.
-* **The Solution:** Converted static preview wrappers into low-level HTML5 `<canvas>` bitmap environments. Because mobile rendering engines recognize the canvas as a media/graphic asset container rather than a UI element, the pixels glide past background inversion filters entirely, guaranteeing 100% color-pure rendering on any mobile device.
+A responsive, mobile-friendly web app that combines three powerful tools:
 
-### 📐 High-DPI "Retina" Layout Normalization
-* Implemented hardware pixel ratio scaling (`window.devicePixelRatio`) combined with context matrix resets (`setTransform`) to prevent responsive canvas fonts and vector graph lines from blurring or shrinking during layout window resize events.
+1. **🎬 Physics Simulator** — Drop objects from Earth, Mars, Jupiter and more. See real-time velocity, acceleration, and impact calculations
+2. **🎨 Color Mixer** — Blend colors using RGB vector math and get auto-labeled color names
+3. **♿ Accessibility Checker** — Test color contrast ratios (WCAG 2.0) in real-time
+
+Built entirely with **vanilla HTML5, CSS3, and JavaScript** — no dependencies, no build tools. Single file. Mobile-optimized.
+
+---
+
+## 🎯 Key Features
+
+### Physics Telemetry Viewport
+- **10 Celestial Bodies** — Simulate gravity on Mercury, Venus, Earth, Mars, Jupiter, Saturn, and more
+- **Hydrodynamic Drag** — Terminal velocity, water buoyancy, trampoline bounces, concrete impacts
+- **Real-Time Graph** — Watch velocity change in live vector graph visualization
+- **Weather Effects** — Add crosswinds and headwinds to affect falling objects
+
+### 🎨 Fluid Color Mixer
+- **RGB Vector Blending** — Uses 3D Euclidean distance formula to find the closest named color
+- **Instant Feedback** — See hex codes and human-readable color names as you mix
+- **Smooth Transitions** — Real-time color preview
+
+### ♿ WCAG 2.0 Contrast Checker
+- **Instant Pass/Fail** — Determines if text/background combinations meet accessibility standards
+- **Auto-Optimizer** — Suggests the nearest passing color combination
+- **Real-time Calculation** — Uses official sRGB gamma expansion formula
+
+---
+
+## 🛠️ Technical Highlights
+
+This project solves real-world web development challenges:
+
+**Force-Dark Mode Canvas Shielding**
+- Problem: Mobile browsers' "Force Dark Mode" distorts CSS colors
+- Solution: Uses HTML5 Canvas as a bitmap container (immune to dark mode overrides)
+
+**High-DPI Retina Rendering**
+- Implements `window.devicePixelRatio` scaling for crisp graphics on all devices
+- Prevents canvas text and vector lines from blurring
+
+**Single-File Architecture**
+- No dependencies, no build step, no npm install
+- Just one HTML file with embedded CSS and JavaScript
+- Download and run locally in seconds
+
+---
+
+## 🚀 Quick Start
+
+### Try It Online
+**[👉 Click here to use it now](https://universal-cyber.github.io/space-art-calculator/)**
+
+### Run Locally
+
+Since this is a single-file app, it's super simple:
+
+```bash
+# Clone the repo
+git clone https://github.com/universal-cyber/space-art-calculator.git
+cd space-art-calculator
+
+# Option 1: Open in your browser directly
+open index.html
+
+# Option 2: Use Python's built-in server (for better compatibility)
+python -m http.server 8000
+# Then visit http://localhost:8000
+```
+
+That's it! No npm, no build tools, no dependencies.
 
 ---
 
 ## 💻 Tech Stack
-* **Language:** HTML5, CSS3 (Modern Flexbox/Grid layouts), JavaScript (Vanilla ES6+)
-* **Graphics Core:** Low-level HTML5 Canvas API
-* **Analytics:** Google Analytics (gtag.js) integration
+
+| Component | Technology |
+|-----------|-----------|
+| **Language** | HTML5, CSS3 (Flexbox/Grid), JavaScript (ES6+) |
+| **Graphics** | HTML5 Canvas API |
+| **Styling** | Modern CSS with Dark Mode support |
+| **Analytics** | Google Analytics (gtag.js) |
+| **Hosting** | GitHub Pages |
 
 ---
 
-## 🏎️ How to Run Locally
+## 📊 Use Cases
 
-Because this utility is completely self-contained in a single file, you don't need to install any heavy packages or node dependencies.
+- **Physics Teachers** — Visualize gravity and drag in different environments
+- **Web Developers** — Learn about Canvas, responsive design, accessibility
+- **Designers** — Test color combinations for WCAG compliance
+- **Students** — Interactive way to understand physics concepts
 
-1. Clone this repository:
-   ```bash
-   git clone [https://github.com/universal-cyber/space-art-calculator/commits?author=universal-cyber]
+---
+
+## 🎓 What You'll Learn
+
+If you explore the code, you'll find examples of:
+- **Canvas API** — Real-time graphics rendering and transformations
+- **Physics Math** — Velocity, acceleration, drag calculations
+- **Color Science** — RGB blending, Euclidean distance, contrast ratios
+- **Responsive Design** — Mobile-first CSS, device pixel ratio handling
+- **Accessibility** — WCAG 2.0 standards and real-time testing
+- **Vanilla JavaScript** — No frameworks, pure ES6+
+
+---
+
+## 📝 Feedback & Contributions
+
+**Have an idea or found a bug?**
+
+- [💬 Start a Discussion](https://github.com/universal-cyber/space-art-calculator/discussions) — Ask questions, suggest features
+- [🐛 Open an Issue](https://github.com/universal-cyber/space-art-calculator/issues) — Report bugs or request features
+- [🚀 Submit a Pull Request](https://github.com/universal-cyber/space-art-calculator/pulls) — Contribute code
+
+### Ideas for Enhancement
+- More celestial bodies or custom gravity settings
+- Export simulation data as CSV
+- Dark mode toggle improvements
+- Additional accessibility testing tools
+- Simulation presets and saved scenarios
+
+---
+
+## 📄 License
+
+MIT License — Feel free to use, modify, and distribute.
+
+---
+
+## 🙏 Show Your Support
+
+If you find this useful:
+- ⭐ **Star this repo** — It helps others discover it
+- 🔄 **Share it** — Tell other developers about it
+- 💬 **Give feedback** — Let me know how you're using it
+- 🤝 **Contribute** — Submit improvements
+
+---
+
+**Made with ❤️ by [universal-cyber](https://github.com/universal-cyber)**
 
