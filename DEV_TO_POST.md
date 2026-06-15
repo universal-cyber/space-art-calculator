@@ -1,8 +1,8 @@
 ---
 title: "Building a Physics Simulator + Color Mixer + Accessibility Checker in Vanilla JavaScript"
 published: false
-description: "How I built an interactive multi-tool web app with Canvas API, real physics calculations, and WCAG 2.0 accessibility testing—all in a single HTML file with zero dependencies."
-tags: javascript, webdev, physics, canvas, accessibility
+description: "A student's journey: building an interactive physics simulator with Canvas API, real physics math, and accessibility testing—all in one HTML file with zero dependencies."
+tags: javascript, webdev, physics, canvas, accessibility, gamedev, learning
 cover_image: https://raw.githubusercontent.com/universal-cyber/space-art-calculator/main/cover-image.jpg
 canonical_url: https://github.com/universal-cyber/space-art-calculator
 ---
@@ -18,7 +18,7 @@ Ever wanted to build something that combines physics, art, and accessibility int
 It's a responsive web app that does three powerful things:
 
 1. **🎬 Drop objects from different planets** and watch real-time physics calculations
-2. **�� Mix colors using RGB vector math** and get auto-labeled color names
+2. **🎨 Mix colors using RGB vector math** and get auto-labeled color names
 3. **♿ Test color accessibility** (WCAG 2.0 compliance) in real-time
 
 No npm. No build tools. No dependencies. Just one HTML file, ~500 lines of JavaScript, and a lot of fun.
@@ -27,12 +27,13 @@ No npm. No build tools. No dependencies. Just one HTML file, ~500 lines of JavaS
 
 ## Why I Built This
 
-I wanted to explore three things:
-- **Physics math** — How do you actually simulate gravity and drag?
-- **Canvas API** — How do modern web graphics really work?
-- **Accessibility science** — Can you teach people WCAG compliance in an interactive way?
+As a Computer Science student focused on game development, I wanted to deepen my understanding of three fundamental skills:
 
-The answer? Yes—all three, in one elegant app.
+- **Physics simulation** — Games need realistic physics engines
+- **Graphics rendering** — Canvas API is similar to game rendering pipelines
+- **Performance optimization** — Critical for games to run smoothly
+
+This project was my way of mastering these fundamentals while building something cool and useful.
 
 ---
 
@@ -68,6 +69,8 @@ function calculateTerminalVelocity(mass, gravity, density, area, dragCoeff) {
 ```
 
 **Live Visualization:** As the object falls, the app renders a real-time vector graph showing velocity curves. You can see exactly how the object accelerates until drag equals gravity.
+
+**Game Dev Connection:** This is exactly how games calculate projectile motion, falling damage, and physics interactions. Understanding this formula is essential for game development.
 
 ---
 
@@ -116,7 +119,7 @@ function findClosestColor(r, g, b) {
 }
 ```
 
-**Why This Matters:** It's a fun way to learn about color science, vector math, and distance calculations in 3D space.
+**Why This Matters:** It's a fun way to learn about color science, vector math, and distance calculations in 3D space—all concepts used in game graphics programming.
 
 ---
 
@@ -208,6 +211,8 @@ ctx.scale(ratio, ratio); // Scale everything accordingly
 // Fonts and lines now render crisply!
 ```
 
+**Game Dev Connection:** Game engines do this exact same thing. Understanding pixel-perfect rendering is crucial for game graphics.
+
 ### 🔧 Challenge #3: Single-File Architecture
 
 **The Goal:**
@@ -271,12 +276,26 @@ Check out the [Contributing Guide](https://github.com/universal-cyber/space-art-
 
 ---
 
+## About Me
+
+I'm a Computer Science student learning C++, JavaScript, and HTML/CSS with a goal of becoming a game developer. This project was a way to deepen my understanding of physics simulation, graphics rendering, and performance optimization—skills that directly apply to game development.
+
+Building projects like this helps me master fundamentals while creating something useful for others. If you're a fellow student or aspiring game dev, I'd love to connect and hear about your journey!
+
+Feel free to:
+- ⭐ **Star the repo** — it helps others discover it
+- 💬 **Open a discussion** — ask questions, share ideas
+- 🤝 **Contribute** — I'd love collaborators!
+
+---
+
 ## Key Takeaways
 
 1. **You don't need frameworks for creative projects** — Vanilla JavaScript + Canvas can do amazing things
 2. **Physics and math are beautiful when you can visualize them** — Interactive demos make concepts click
 3. **Accessibility isn't just a checkbox** — Understanding WCAG means understanding color science
 4. **Single-file architecture can be elegant** — If you're disciplined about organization
+5. **Game dev fundamentals matter** — Physics, graphics, and performance optimization apply everywhere
 
 ---
 
@@ -287,6 +306,7 @@ I'm working on:
 - [ ] Mobile touch controls for better UX
 - [ ] Dark mode toggle with Canvas preservation
 - [ ] Educational mode with guided tutorials
+- [ ] More game dev examples (projectiles, collision detection)
 - [ ] Performance optimizations for older devices
 
 ---
@@ -301,4 +321,4 @@ If you found this interesting, [star the repo on GitHub](https://github.com/univ
 
 **Happy coding! 🚀**
 
-*P.S. — This was built as a single-file app to prove that you don't always need complex tooling. Sometimes, elegant simplicity is the best design.*
+*P.S. — If you're learning game development, I'd recommend building physics simulations in vanilla JS first. It forces you to understand the fundamentals before jumping into game engines. This project proved that to me.*
