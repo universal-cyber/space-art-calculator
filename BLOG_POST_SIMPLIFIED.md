@@ -2,7 +2,7 @@
 title: "I Built a Physics Simulator + Color Mixer in One HTML File"
 published: true
 description: "A student's journey: physics simulation, color math, and accessibility—all in vanilla JavaScript with zero dependencies."
-tags: javascript, gamedev, physics, canvas
+tags: javascript, gamedev, learning, canvas
 cover_image: https://raw.githubusercontent.com/universal-cyber/space-art-calculator/main/assets/cover.jpg
 canonical_url: https://github.com/universal-cyber/space-art-calculator
 ---
