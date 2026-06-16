@@ -2,14 +2,12 @@
 title: "I Built a Physics Simulator + Color Mixer in One HTML File"
 published: true
 description: "A student's journey: physics simulation, color math, and accessibility—all in vanilla JavaScript with zero dependencies."
-tags: javascript, physics, gamedev, canvas, learning
+tags: javascript, gamedev, physics, canvas
 cover_image: https://raw.githubusercontent.com/universal-cyber/space-art-calculator/main/assets/cover.jpg
 canonical_url: https://github.com/universal-cyber/space-art-calculator
 ---
 
-# I Built a Physics Simulator + Color Mixer in One HTML File
-
-**[Try it live →](https://universal-cyber.github.io/space-art-calculator/)**
+{% embed https://universal-cyber.github.io/space-art-calculator/ %}
 
 I wanted to understand three things game developers need to know: physics simulation, graphics rendering, and performance. So I built a single-file web app that does all three.
 
@@ -32,9 +30,10 @@ No npm. No build tools. No dependencies. Just ~500 lines of JavaScript in one HT
 When you drop a 1kg ball from Earth, it accelerates until drag force equals gravity. That's called *terminal velocity*.
 
 The math:
-```
-v_terminal = √((2 × mass × gravity) / (density × area × drag_coefficient))
-```
+
+{% katex %}
+v_{terminal} = \sqrt{\frac{2 \cdot m \cdot g}{\rho \cdot A \cdot C_d}}
+{% endkatex %}
 
 **Real numbers:**
 - Earth: ~53 m/s (120 mph)
@@ -55,11 +54,9 @@ function terminalVelocity(mass, gravity, density, area, drag) {
 
 When you mix two colors, you're just averaging their RGB values:
 
-```
-Red_mixed = (R₁ + R₂) / 2
-Green_mixed = (G₁ + G₂) / 2
-Blue_mixed = (B₁ + B₂) / 2
-```
+{% katex %}
+R_{mixed} = \frac{R_1 + R_2}{2}, \quad G_{mixed} = \frac{G_1 + G_2}{2}, \quad B_{mixed} = \frac{B_1 + B_2}{2}
+{% endkatex %}
 
 Then I use **Euclidean distance** to find the closest named color:
 
@@ -78,15 +75,18 @@ Mix red + blue = purple. The app instantly finds the closest color name. That's 
 WCAG (Web Content Accessibility Guidelines) says your text needs enough contrast to be readable. The formula:
 
 **Step 1:** Convert RGB to luminance (how bright it is)
-```javascript
-luminance = 0.2126×R + 0.7152×G + 0.0722×B
+
+{% katex %}
+L = 0.2126 \times R + 0.7152 \times G + 0.0722 \times B
+{% endkatex %}
+
 (with gamma correction applied)
-```
 
 **Step 2:** Calculate contrast ratio
-```javascript
-ratio = (brighter + 0.05) / (darker + 0.05)
-```
+
+{% katex %}
+\text{Contrast Ratio} = \frac{L_{brighter} + 0.05}{L_{darker} + 0.05}
+{% endkatex %}
 
 **Step 3:** Check if it passes
 - **AA level:** 4.5:1 or higher ✅
@@ -133,7 +133,9 @@ Now everything renders crisply.
 
 ## How to Run It
 
-**Live:** [space-art-calculator.github.io](https://universal-cyber.github.io/space-art-calculator/)
+**Live:**
+
+{% embed https://universal-cyber.github.io/space-art-calculator/ %}
 
 **Locally:**
 ```bash
@@ -150,7 +152,7 @@ From reading the code, you'll see:
 - Canvas rendering (used in every game engine)
 - Physics math (gravity, drag, velocity)
 - Color science (RGB, luminance, contrast)
-- Responsive design (mobile-first, device pixel ratio)
+- Responsive design (mobile-first, device pixel ratio handling)
 - Vanilla JavaScript (ES6+, no frameworks)
 
 ---
@@ -191,6 +193,6 @@ If you're learning game development, start here. Understand the fundamentals bef
 
 ---
 
-**[Try the demo →](https://universal-cyber.github.io/space-art-calculator/)**
+{% embed https://github.com/universal-cyber/space-art-calculator %}
 
 Happy coding! 🚀
